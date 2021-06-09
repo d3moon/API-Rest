@@ -32,6 +32,7 @@
 
 ##### DELETE -> http://localhost:3333/repositories/:id/deslike
 
+###### OBS: To put the id in the other methods, copy it from GET or POST to the object in JSON answered.
 
 The data to be placed in the Post method body are:
 
