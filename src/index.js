@@ -82,7 +82,7 @@ app.delete('/repositories/:id/deslike', (req, res)=>{
   }
   
   const deslikes = repositories[projectIndex].likes-= 1 ;
-  return res.json("Esse é o total de deslikes: " + deslikes);
+  return res.json("This is the total dislike:: " + deslikes);
 })
 
 
