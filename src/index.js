@@ -82,10 +82,12 @@ app.delete('/repositories/:id/deslike', (req, res)=>{
   }
   
   const deslikes = repositories[projectIndex].likes-= 1 ;
-  if(deslikes === 0 )[
+
+  if(deslikes === 0 ){
     res.json({error: 'Nenhum like foi registrado!'})
-  ]
-  return res.json("Esse é o total de deslikes: " + deslikes);
+}
+ 
+  return res.json("This is the total dislike:" + deslikes);
 })
 
 
