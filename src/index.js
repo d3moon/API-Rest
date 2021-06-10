@@ -15,9 +15,7 @@ app.get('/repositories', (req, res)=>{
 
 app.post('/repositories', (req, res)=>{  
   const {title, url, techs} = req.body;
-  const repository = { id: uuid(), title, url, techs, likes: 0};
-
-
+  let repository = { id: uuid(), title, url, techs, likes: 0};
   repositories.push(repository);
   return res.json(repository);
 })
@@ -80,14 +78,27 @@ app.delete('/repositories/:id/deslike', (req, res)=>{
   if(projectIndex < 0){
    return res.status(400).json({error: "Project not found."})
   }
-  
-  const deslikes = repositories[projectIndex].likes-= 1 ;
 
-  if(deslikes === 0 ){
-    res.json({error: 'Nenhum like foi registrado!'})
-}
- 
-  return res.json("This is the total dislike:" + deslikes);
+  initialLike = repositories[projectIndex].likes <= 0
+
+  
+  const deslikes = repositories[projectIndex].likes-= 1;
+  while (initialLike){
+    if(initialLike){
+      repositories[projectIndex].likes = 0
+       return res.json({error: 'Nenhum like foi registrado!'})
+    }else{
+      return res.json("This is the total dislike:" + deslikes);
+    }
+  }
+
+
+  if( deslikes === 0){
+    repositories[projectIndex].likes = 0
+
+  }
+     return res.json("This is the total dislike:" + deslikes)
+
 })
 
 
